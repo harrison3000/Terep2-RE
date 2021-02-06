@@ -5,13 +5,25 @@
 org  0x100        ; .com files always start 256 bytes into the segment
 bits 16
 
-; int 21h is going to want...
+jmp main
 
-mov  dx, msg      ; the address of or message in dx
+%macro print 1
+mov  dx, %1      ; the address of or message in dx
 mov  ah, 9        ; ah=9 - "print string" sub-function
 int  0x21         ; call dos services
+%endmacro
 
-mov  ah, 0x4c     ; "terminate program" sub-function
-int  0x21         ; call dos services
+exit:
+	mov  ah, 0x4c     ; "terminate program" sub-function
+	int  0x21         ; call dos services
 
-msg  db 'Hello, World!', 0x0d, 0x0a, '$'   ; $-terminated message
+
+main:
+	print msg
+	jmp end
+
+
+msg db 'Iniciando', 0x0d, 0x0a, '$'   ; $-terminated message
+
+
+end:
