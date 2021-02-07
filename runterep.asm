@@ -54,10 +54,20 @@ main:
 	mov ax, 0x16eb
 	mov ss, ax
 
+	;mov ax, 0x0400
+	;mov esp, ax
+
 	xor eax, eax
 	xor ebx, ebx
 	xor ecx, ecx
 	xor edx, edx
+
+	xor esi, esi
+	xor edi, edi
+
+	mov fs, ax
+	mov gs, ax
+
 
 	jmp 0x01ed:0x0000
 
