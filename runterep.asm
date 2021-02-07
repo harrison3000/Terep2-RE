@@ -7,6 +7,10 @@ bits 16
 
 jmp main
 
+segment code align=16
+code:
+	incbin "01dd.bin"
+
 
 %macro print 1
 mov  dx, %1      ; the address of or message in dx
@@ -31,24 +35,27 @@ exit:
 
 main:
 	print msg
-	calcSeg oridata
-	mov ds, ax
+
+	mov ax, 0x01dd
 	mov es, ax
-	calcSeg code
-	;TODO use far jump?
-	push ax
-	push 0x0000
-	retf
+	mov ds, ax
+
+	mov si, code
+	mov di, 0
+	mov cx, 65024
+	mmove:
+		mov ax, [si]
+		mov [di], ax
+		add si, 2
+		add di, 2
+		dec cx ;we are moving words, not bytes
+	loop mmove
+
+	mov ax, 0x16eb
+	mov ss, ax
+
+	jmp 0x01ed:0x0000
 
 
 msg db 'Starting', 0x0d, 0x0a, '$'   ; $-terminated message
-
-
-segment oridata align=16
-oridata:
-	incbin "oridata.bin"
-
-segment code align=16
-code:
-	incbin "code.bin"
 
