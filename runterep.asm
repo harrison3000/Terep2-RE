@@ -16,3 +16,30 @@ segment data align=16
 
 segment stack class=stack
 	resb 8192
+
+segment code
+	..start:
+
+	;poor man's relocation
+	mov ax,  data
+	mov [339], ax
+
+	mov ax, 0xdfd8
+	mov bp, ax
+
+	mov ax, 0x16eb
+	mov ss, ax
+
+	;mov ax, 0x0400
+	;mov esp, ax
+
+	;register clearing
+	xor eax, eax
+	xor ebx, ebx
+	xor ecx, ecx
+	xor edx, edx
+
+	xor esi, esi
+	xor edi, edi
+
+	jmp 01edh:0000h
