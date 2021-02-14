@@ -30,8 +30,8 @@ segment code
 	mov ax, 0x16eb
 	mov ss, ax
 
-	;mov ax, 0x0400
-	;mov esp, ax
+	mov eax, 0x00000400
+	mov esp, eax
 
 	;register clearing
 	xor eax, eax
@@ -40,6 +40,6 @@ segment code
 	xor edx, edx
 
 	xor esi, esi
-	xor edi, edi
+	mov edi, 00270000h
 
 	jmp 01edh:0000h
