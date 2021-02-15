@@ -24,8 +24,8 @@ segment code
 	mov ax,  data
 	mov [83 + 256], ax
 
-	mov ax, ss
-	add ax, 0x40
+	mov ax, ds
+	add ax, 0x154E
 	mov [71 + 256], ax
 
 	mov ax, 0xdfd8
@@ -41,7 +41,8 @@ segment code
 	xor edx, edx
 
 	xor esi, esi
-	mov edi, 00270000h
+	xor edi, edi
+	;mov edi, 00270000h
 
 	mov fs, ax
 	mov gs, ax
