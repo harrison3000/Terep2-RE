@@ -24,6 +24,10 @@ segment code
 	mov ax,  data
 	mov [83 + 256], ax
 
+	mov ax, ss
+	add ax, 0x40
+	mov [71 + 256], ax
+
 	mov ax, 0xdfd8
 	mov bp, ax
 
