@@ -15,7 +15,7 @@ segment data align=16
 
 
 segment stack class=stack
-	resb 8192
+	incbin "16eb.bin"
 
 segment code
 	..start:
