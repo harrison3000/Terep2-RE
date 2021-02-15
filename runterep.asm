@@ -22,7 +22,7 @@ segment code
 
 	;poor man's relocation
 	mov ax,  data
-	mov [339], ax
+	mov [83 + 256], ax
 
 	mov ax, 0xdfd8
 	mov bp, ax
@@ -42,4 +42,4 @@ segment code
 	xor esi, esi
 	mov edi, 00270000h
 
-	jmp 01edh:0000h
+	jmp code:0000h
