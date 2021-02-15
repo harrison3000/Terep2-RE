@@ -27,9 +27,6 @@ segment code
 	mov ax, 0xdfd8
 	mov bp, ax
 
-	mov ax, 0x16eb
-	mov ss, ax
-
 	mov eax, 0x00000400
 	mov esp, eax
 
@@ -41,5 +38,8 @@ segment code
 
 	xor esi, esi
 	mov edi, 00270000h
+
+	mov fs, ax
+	mov gs, ax
 
 	jmp code:0000h
