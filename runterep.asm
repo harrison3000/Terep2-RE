@@ -4,20 +4,16 @@
 
 bits 16
 
-;segment data
-;	incbin "01dd.bin"
-
-segment code
+segment code align=16
 	incbin "01ed.bin"
 
 segment data align=16
 	incbin "07ba.bin"
 
-
-segment stack class=stack
+segment gstack
 	incbin "16eb.bin"
 
-segment code
+segment code2
 	..start:
 
 	;poor man's relocation
@@ -30,6 +26,9 @@ segment code
 
 	mov ax, 0xdfd8
 	mov bp, ax
+
+	mov ax, gstack
+	mov ss, ax
 
 	mov eax, 0x00000400
 	mov esp, eax
@@ -47,4 +46,8 @@ segment code
 	mov fs, ax
 	mov gs, ax
 
+
 	jmp code:0000h
+
+segment mystack class=stack
+	resb 8192
