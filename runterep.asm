@@ -1,17 +1,16 @@
-; hello-DOS.asm - single-segment, 16-bit "hello world" program
-;
-; assemble with "nasm -f bin -o hi.com hello-DOS.asm"
-
 bits 16
 
 segment code align=16
-	incbin "01ed.bin"
+	;must be 23760 (0x5CD0) bytes,
+	incbin "code.bin"
 
 segment data align=16
-	incbin "07ba.bin"
+	;I tried 62224 (0xF310) bytes and it worked
+	incbin "data.bin"
 
 segment gstack
-	incbin "16eb.bin"
+	;8192 bytes, seems to do the trick
+	incbin "stack.bin"
 
 segment code2
 	..start:
@@ -25,6 +24,7 @@ segment code2
 	add ax, 0x154E
 	mov [71 + 256], ax
 
+	;I don't know what this magic number is, but the original code did this
 	mov ax, 0xdfd8
 	mov bp, ax
 
