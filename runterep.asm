@@ -19,6 +19,7 @@ segment code2
 	;poor man's relocation
 	mov ax,  data
 	mov [83 + 256], ax
+	mov [0x568A + 256], ax
 
 	mov ax, ds
 	add ax, 0x154E
