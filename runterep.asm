@@ -48,7 +48,7 @@ segment code2
 	mov gs, ax
 
 
-	jmp code:0000h
+	call code:0000h
 
 segment mystack class=stack
 	resb 8192
