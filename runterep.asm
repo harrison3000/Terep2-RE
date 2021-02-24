@@ -56,9 +56,12 @@ segment code2
 	..start:
 
 	;poor man's relocation
+	mov ax, code
+	mov fs, ax
+
 	mov ax,  data
-	mov [0x53 + 0x100], ax
-	mov [0x568A + 0x100], ax
+	mov [fs:0x53], ax
+	mov [fs:0x568A], ax
 
 	;I don't know what this magic number is, but the original code did this
 	mov ax, 0xdfd8
