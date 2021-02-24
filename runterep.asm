@@ -2,7 +2,12 @@ bits 16
 
 segment code align=16
 	;must be 23760 (0x5CD0) bytes,
-	incbin "code.bin",0,0x58fc
+	incbin "code.bin",$,0x46 - $
+
+	mov bx, 0x154e
+	times 5 nop
+
+	incbin "code.bin",$,0x58fc - $
 
 	;reimplementation of the function at 0x58fc
 	sbr: ; Start of a Bunch of Repeated instructions
@@ -54,10 +59,6 @@ segment code2
 	mov ax,  data
 	mov [0x53 + 0x100], ax
 	mov [0x568A + 0x100], ax
-
-	mov ax, ds
-	add ax, 0x154E
-	mov [0x47 + 0x100], ax
 
 	;I don't know what this magic number is, but the original code did this
 	mov ax, 0xdfd8
