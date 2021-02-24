@@ -85,5 +85,12 @@ segment code2
 
 	call code:0000h
 
+	nop
+
+	;DOS "terminate" function and return, this will never be reached, but keeps ghidra happy
+	mov ah,0x4C
+	int 0x21
+	ret
+
 segment mystack class=stack
 	resb 8192
