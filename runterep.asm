@@ -1,8 +1,7 @@
 bits 16
 
 segment code align=16
-	;must be 23760 (0x5CD0) bytes,
-	incbin "codep.bin"
+	incbin "codep.bin", 0, 23760
 
 
 segment data align=16

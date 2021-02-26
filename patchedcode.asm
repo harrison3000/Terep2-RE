@@ -20,6 +20,7 @@ patchPoint 0x46
 	times 5 nop
 
 ;reimplementation of the function at 0x58fc
+;seems to be sound related, If you imediately return the game becomes muted
 patchPoint 0x58fc
 
 	push ax
