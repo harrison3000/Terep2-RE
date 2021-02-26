@@ -1,23 +1,28 @@
 bits 16
 
+
 %macro patchPoint 1
 	incbin "code.bin",$,%1 - $
+	%%tmpLabl:
+	%undef lastPP
+	%xdefine lastPP %%tmpLabl
 %endmacro
-;params: originalSize, start
-%macro padFunc 2
-	times (%1 - ($ - %2)) nop ;pad with nops
+
+;pads the previous patch point to the given size
+;params: originalSize
+%macro padFunc 1
+	times (%1 - ($ - lastPP)) nop ;pad with nops
 %endmacro
 
 patchPoint 0x46
 
 mov bx, 0x154e
 times 5 nop
-;times 4 nop ;nops the call to dos interrupt 4Ah
 
-patchPoint 0x58fc
 
 ;reimplementation of the function at 0x58fc
-sbr: ; Start of a Bunch of Repeated instructions
+patchPoint 0x58fc
+
 push ax
 xchg ah,al
 mov dx, 0x388
@@ -45,7 +50,7 @@ pop ecx
 pop ax
 ret
 
-padFunc 0x30, sbr
+padFunc 0x30
 
 
 ;write the rest of the file
