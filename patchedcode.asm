@@ -1,12 +1,16 @@
 bits 16
 
-incbin "code.bin",$,0x46 - $
+%macro patchPoint 1
+	incbin "code.bin",$,%1 - $
+%endmacro
+
+patchPoint 0x46
 
 mov bx, 0x154e
 times 5 nop
 ;times 4 nop ;nops the call to dos interrupt 4Ah
 
-incbin "code.bin",$,0x58fc - $
+patchPoint 0x58fc
 
 ;reimplementation of the function at 0x58fc
 sbr: ; Start of a Bunch of Repeated instructions
@@ -40,4 +44,6 @@ ret
 ;0x30 is the size of the original function
 times (0x30 - ($ - sbr)) nop ;pad with nops
 
+
+;write the rest of the file
 incbin "code.bin",$
