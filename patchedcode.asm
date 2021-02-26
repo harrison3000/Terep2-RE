@@ -16,41 +16,40 @@ bits 16
 
 patchPoint 0x46
 
-mov bx, 0x154e
-times 5 nop
-
+	mov bx, 0x154e
+	times 5 nop
 
 ;reimplementation of the function at 0x58fc
 patchPoint 0x58fc
 
-push ax
-xchg ah,al
-mov dx, 0x388
-out dx, al
+	push ax
+	xchg ah,al
+	mov dx, 0x388
+	out dx, al
 
-push ecx
+	push ecx
 
-mov ecx, 6
-lab1:
-in al,dx
-loop lab1
+	mov ecx, 6
+	lab1:
+	in al,dx
+	loop lab1
 
-inc dx		;0x5909
-mov al,ah	;0x590a
-out dx,al	;0x590c
+	inc dx		;0x5909
+	mov al,ah	;0x590a
+	out dx,al	;0x590c
 
-mov ecx, 28
-lab2:
-in al,dx
-loop lab2
+	mov ecx, 28
+	lab2:
+	in al,dx
+	loop lab2
 
-;0x5929
-dec dx
-pop ecx
-pop ax
-ret
+	;0x5929
+	dec dx
+	pop ecx
+	pop ax
+	ret
 
-padFunc 0x30
+	padFunc 0x30
 
 
 ;write the rest of the file
