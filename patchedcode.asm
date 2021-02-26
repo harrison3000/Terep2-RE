@@ -3,6 +3,10 @@ bits 16
 %macro patchPoint 1
 	incbin "code.bin",$,%1 - $
 %endmacro
+;params: originalSize, start
+%macro padFunc 2
+	times (%1 - ($ - %2)) nop ;pad with nops
+%endmacro
 
 patchPoint 0x46
 
@@ -41,8 +45,7 @@ pop ecx
 pop ax
 ret
 
-;0x30 is the size of the original function
-times (0x30 - ($ - sbr)) nop ;pad with nops
+padFunc 0x30, sbr
 
 
 ;write the rest of the file
