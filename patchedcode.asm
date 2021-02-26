@@ -1,0 +1,43 @@
+bits 16
+
+incbin "code.bin",$,0x46 - $
+
+mov bx, 0x154e
+times 5 nop
+;times 4 nop ;nops the call to dos interrupt 4Ah
+
+incbin "code.bin",$,0x58fc - $
+
+;reimplementation of the function at 0x58fc
+sbr: ; Start of a Bunch of Repeated instructions
+push ax
+xchg ah,al
+mov dx, 0x388
+out dx, al
+
+push ecx
+
+mov ecx, 6
+lab1:
+in al,dx
+loop lab1
+
+inc dx		;0x5909
+mov al,ah	;0x590a
+out dx,al	;0x590c
+
+mov ecx, 28
+lab2:
+in al,dx
+loop lab2
+
+;0x5929
+dec dx
+pop ecx
+pop ax
+ret
+
+;0x30 is the size of the original function
+times (0x30 - ($ - sbr)) nop ;pad with nops
+
+incbin "code.bin",$
