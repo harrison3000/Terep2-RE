@@ -1,6 +1,5 @@
 bits 16
 
-
 %macro patchPoint 1
 	incbin "code.bin",$,%1 - $
 	%%tmpLabl:
@@ -13,6 +12,9 @@ bits 16
 %macro padFunc 1
 	times (%1 - ($ - lastPP)) nop ;pad with nops
 %endmacro
+
+
+;=================END MACROS========================
 
 patchPoint 0x46
 

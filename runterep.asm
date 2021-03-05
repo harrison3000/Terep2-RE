@@ -9,11 +9,9 @@ segment data align=16
 	incbin "data.bin"
 
 segment gstack
-	;0x400 (0x80 * 8) bytes of stack, the game code will adjust the memory size right after this stack
-	;it will overwrite the code below, but who cares? it already served its puporse when this happens
-	;and maybe thats why I had to put the bootstrap code after everything,
-	;otherwise the block would be over the stack and some data (?)
-	times 0x80 db "StackSeg"
+	;originally it was 0x400  (0x80  * 8)
+	;now its           0x2000 (0x400 * 8)
+	times 0x400 db "StackSeg"
 
 segment code2
 	resb 0x100 ;just to separate things
@@ -35,7 +33,7 @@ segment code2
 	mov ax, gstack
 	mov ss, ax
 
-	mov eax, 0x00000400
+	mov eax, 0x00002000 ;stack size
 	mov esp, eax
 
 	;register clearing
