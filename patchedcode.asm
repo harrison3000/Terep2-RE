@@ -16,7 +16,10 @@ bits 16
 
 patchPoint 0x46
 
-	mov bx, 0x154e
+	;this is the size of the program
+	;the memory block will be limited to this and new blocks will be created
+	;originally 0x154e
+	mov bx, 0x3000
 	times 5 nop
 
 ;reimplementation of the function at 0x58fc
