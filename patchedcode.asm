@@ -60,3 +60,5 @@ patchPoint 0x58fc
 
 ;write the rest of the file
 incbin "code.bin",$
+
+;================ORIGINAL END===============

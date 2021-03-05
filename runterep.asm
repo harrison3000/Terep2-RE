@@ -1,7 +1,7 @@
 bits 16
 
 segment code align=16
-	incbin "codep.bin", 0, 23760
+	incbin "codep.bin"
 
 
 segment data align=16
