@@ -8,7 +8,7 @@ segment data align=16
 	;I tried 62224 (0xF310) bytes and it worked
 	incbin "data.bin"
 
-segment gstack
+segment stack class=stack
 	;originally it was 0x400  (0x80  * 8)
 	;now its           0x2000 (0x400 * 8)
 	times 0x400 db "StackSeg"
@@ -17,6 +17,8 @@ segment code2
 	resb 0x100 ;just to separate things
 
 	..start:
+	mov ax, 0x2000
+	mov sp, ax
 
 	;poor man's relocation
 	mov ax, code
@@ -29,12 +31,6 @@ segment code2
 	;I don't know what this magic number is, but the original code did this
 	mov ax, 0xdfd8
 	mov bp, ax
-
-	mov ax, gstack
-	mov ss, ax
-
-	mov eax, 0x00002000 ;stack size
-	mov esp, eax
 
 	;register clearing
 	xor eax, eax
@@ -58,6 +54,3 @@ segment code2
 	mov ah,0x4C
 	int 0x21
 	ret
-
-segment mystack class=stack
-	resb 8192
