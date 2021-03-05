@@ -2,3 +2,5 @@
 *.com
 *.obj
 *.exe
+
+/.vscode/
