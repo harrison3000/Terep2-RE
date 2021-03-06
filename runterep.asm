@@ -1,7 +1,16 @@
 bits 16
 
+%define codeBinName "codep.bin"
+%include "macros.asm"
+
 segment code align=16
-	incbin "codep.bin"
+	patchPoint 0x52
+	mov ax, data
+
+	patchPoint 0x5689
+	mov ax, data
+
+	incbin "codep.bin",$
 
 
 segment data align=16
@@ -19,14 +28,6 @@ segment code2
 	..start:
 	mov ax, 0x2000
 	mov sp, ax
-
-	;poor man's relocation
-	mov ax, code
-	mov fs, ax
-
-	mov ax,  data
-	mov [fs:0x53], ax
-	mov [fs:0x568A], ax
 
 	;I don't know what this magic number is, but the original code did this
 	mov ax, 0xdfd8
