@@ -1,0 +1,2 @@
+"Address","Function name","comment"
+2BAA,CopyFramebuffer,"Gets the origin segment from the DB10 address on DS"
