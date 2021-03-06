@@ -10,3 +10,7 @@
 %macro padFunc 1
 	times (%1 - ($ - lastPP)) nop ;pad with nops
 %endmacro
+
+%macro writeRemaining 0
+	incbin codeBinName,$
+%endmacro

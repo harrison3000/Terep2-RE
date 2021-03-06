@@ -10,7 +10,7 @@ segment code align=16
 	patchPoint 0x5689
 	mov ax, data
 
-	incbin "codep.bin",$
+	writeRemaining
 
 
 segment data align=16

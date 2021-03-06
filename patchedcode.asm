@@ -46,7 +46,6 @@ patchPoint 0x58fc
 	padFunc 0x30
 
 
-;write the rest of the file
-incbin "code.bin",$
+writeRemaining
 
 ;================ORIGINAL END===============
