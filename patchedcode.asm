@@ -4,6 +4,13 @@ bits 16
 
 %include "macros.asm"
 
+patchPoint 0x1e
+	;this was a simple code reached by a jump, I transformed it into a call to help ghidra
+	;make more sense of the code
+	call earlyEnd
+	infiniteLoop
+	padFunc 0x46 - 0x1e
+
 patchPoint 0x46
 
 	;this is the size of the program
@@ -49,3 +56,10 @@ patchPoint 0x58fc
 writeRemaining
 
 ;================ORIGINAL END===============
+
+db "early end", 0
+earlyEnd:
+	incRange 0x1e, 0x46
+	ret
+
+

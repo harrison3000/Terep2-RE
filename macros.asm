@@ -14,3 +14,13 @@
 %macro writeRemaining 0
 	incbin codeBinName,$
 %endmacro
+
+%macro incRange 2
+	incbin codeBinName, %1, (%2 - %1)
+%endmacro
+
+%macro infiniteLoop 0
+	%%tt:
+	nop
+	jmp %%tt
+%endmacro
