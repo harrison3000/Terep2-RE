@@ -12,12 +12,9 @@ patchPoint 0x1e
 	padFunc 0x46 - 0x1e
 
 patchPoint 0x46
-
-	;this is the size of the program
-	;the memory block will be limited to this and new blocks will be created
-	;originally 0x154e
-	mov bx, 0x3000
-	times 5 nop
+	;Sets the program block to 0x3000, originally 0x154e
+	call setMemSize
+	padFunc 0x52 - 0x46
 
 ;reimplementation of the function at 0x58fc
 ;seems to be sound related, If you imediately return the game becomes muted
@@ -62,4 +59,9 @@ earlyEnd:
 	incRange 0x1e, 0x46
 	ret
 
-
+db "Sets memory size", 0
+setMemSize:
+	mov bx, 0x3000
+	mov ah, 0x4a
+	int 0x21
+	ret
