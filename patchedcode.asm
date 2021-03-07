@@ -5,16 +5,18 @@ bits 16
 %include "macros.asm"
 
 patchPoint 0x1e
-	;this was a simple code reached by a jump, I transformed it into a call to help ghidra
-	;make more sense of the code
-	call earlyEnd
-	infiniteLoop
 	padFunc 0x46 - 0x1e
 
 patchPoint 0x46
 	;Sets the program block to 0x3000, originally 0x154e
 	call setMemSize
 	padFunc 0x52 - 0x46
+
+patchPoint 0x11b
+	call fileRelatedThings
+	jmp end11b
+	padFunc 0x191 - 0x11b
+	end11b:
 
 ;reimplementation of the function at 0x58fc
 ;seems to be sound related, If you imediately return the game becomes muted
@@ -57,7 +59,7 @@ writeRemaining
 db "early end", 0
 earlyEnd:
 	incRange 0x1e, 0x46
-	ret
+	infiniteLoop
 
 db "Sets memory size", 0
 setMemSize:
@@ -65,3 +67,57 @@ setMemSize:
 	mov ah, 0x4a
 	int 0x21
 	ret
+
+db "File related things", 0
+;I don't know what any of this does, but it calls a lot of dos interrupts
+;it was disassembled using ndisasm
+fileRelatedThings:
+		mov dx,0x1a3d
+		mov al,0x0
+		mov ah,0x3d
+		int 0x21
+		mov bx,ax
+		jc lab0142
+		nop
+		nop
+		mov dx,0xe9e2
+		mov cx,0x2
+		mov ah,0x3f
+		int 0x21
+		mov dx,0xe9e4
+		mov cx,0x2
+		mov ah,0x3f
+		int 0x21
+		mov ah,0x3e
+		int 0x21
+	lab0142:
+		mov ah,0x48
+		mov bx,0x1000
+		int 0x21
+		jc earlyEnd
+		mov [0x1a45],ax
+		mov gs,ax
+		mov ah,0x48
+		mov bx,0x1000
+		int 0x21
+		jc earlyEnd
+		mov [0x1a47],ax
+		mov fs,ax
+		mov ah,0x48
+		mov bx,0x1000
+		int 0x21
+		jc earlyEnd
+		mov [0x1a49],ax
+		mov ah,0x48
+		mov bx,0x1000
+		int 0x21
+		jc earlyEnd
+		mov [0x1a4b],ax
+		call 0x24c0
+		call 0x255c
+		mov word [0x5bba],0x0
+		mov di,0x5bd0
+		mov [0x5bbc],di
+
+	ret
+
