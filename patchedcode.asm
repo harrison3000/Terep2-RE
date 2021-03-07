@@ -56,17 +56,17 @@ writeRemaining
 
 ;================ORIGINAL END===============
 
-db "early end", 0
-earlyEnd:
-	incRange 0x1e, 0x46
-	infiniteLoop
-
 db "Sets memory size", 0
 setMemSize:
 	mov bx, 0x3000
 	mov ah, 0x4a
 	int 0x21
 	ret
+
+db "early end", 0
+earlyEnd:
+	incRange 0x1e, 0x46
+	infiniteLoop
 
 db "File related things", 0
 ;I don't know what any of this does, but it calls a lot of dos interrupts
