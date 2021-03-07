@@ -20,6 +20,18 @@ patchPoint 0x11b
 	padFunc 0x17e - 0x11b
 	end11b:
 
+patchPoint 0x252
+	jmp preLoop
+	nop
+	nop
+
+patchPoint 0x563
+	;break on esc
+	jnz afterRet
+	ret
+	nop
+	afterRet:
+
 ;reimplementation of the function at 0x58fc
 ;seems to be sound related, If you imediately return the game becomes muted
 patchPoint 0x58fc
@@ -126,4 +138,12 @@ allocateMemory:
 	earlyEnd:
 		call progEnd
 		ret
+
+
+db "pre loop", 0
+preLoop:
+	mov byte [0x6e],1
+	call 0x257 ;main loop
+	jmp 0x654 ;the only way to exit the loop is by pressing esc to break
+
 
