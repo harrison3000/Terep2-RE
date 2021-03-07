@@ -1,2 +1,5 @@
-"Address","Function name","comment"
-2BAA,CopyFramebuffer,"Gets the origin segment from the DB10 address on DS"
+Address,Function name (i don’t really know),comment
+2BAA,CopyFramebuffer,Gets the origin segment from the DB10 address on DS
+24C0,LoadFiles,Load files related to the track
+255C,LoadTextures,Load textures.pcx
+2454,LoadCarData,Load carX.dat

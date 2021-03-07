@@ -1,2 +1,3 @@
-"Address","sizeof","Variable name","Comment"
-DB10,2,"FramebufferSegment","Stores the segment of the framebuffer"
+Address,sizeof,Variable name,Comment
+DB10,2,FramebufferSegment,Stores the segment of the framebuffer
+5B67,4,XMS buffer,Linear address of the buffer allocated using XMS

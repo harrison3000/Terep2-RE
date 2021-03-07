@@ -13,9 +13,9 @@ patchPoint 0x46
 	padFunc 0x52 - 0x46
 
 patchPoint 0x11b
-	call fileRelatedThings
+	call allocateMemory
 	jmp end11b
-	padFunc 0x191 - 0x11b
+	padFunc 0x17e - 0x11b
 	end11b:
 
 ;reimplementation of the function at 0x58fc
@@ -71,13 +71,17 @@ earlyEnd:
 db "File related things", 0
 ;I don't know what any of this does, but it calls a lot of dos interrupts
 ;it was disassembled using ndisasm
-fileRelatedThings:
+;seems to be related to segment allocations
+allocateMemory:
+	;tries to open sim.cfg
 		mov dx,0x1a3d
 		mov al,0x0
 		mov ah,0x3d
 		int 0x21
 		mov bx,ax
-		jc lab0142
+		jc lab0142 ;sim.cfg not found
+
+		;sim.cfg found
 		nop
 		nop
 		mov dx,0xe9e2
@@ -91,6 +95,8 @@ fileRelatedThings:
 		mov ah,0x3e
 		int 0x21
 	lab0142:
+
+		;memory allocations
 		mov ah,0x48
 		mov bx,0x1000
 		int 0x21
@@ -113,11 +119,5 @@ fileRelatedThings:
 		int 0x21
 		jc earlyEnd
 		mov [0x1a4b],ax
-		call 0x24c0
-		call 0x255c
-		mov word [0x5bba],0x0
-		mov di,0x5bd0
-		mov [0x5bbc],di
-
 	ret
 
