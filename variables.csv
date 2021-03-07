@@ -7,3 +7,4 @@ E9E4,2,"Loaded from sim.cfg, offset 2",Seems to be related to car strength or re
 CS:571E,1,LastKey,"Scan code of the last key pressed, set by the keyboard interrupt handler"
 011C,2,CameraHeigth,"Can be changed in-game with the camera control keys (/,*,-,+)"
 011E,2,CameraDistance,"Can be changed in-game with the camera control keys (/,*,-,+)"
+007D,1,SplitScreen,"1 if split-screen, 0 if not"
