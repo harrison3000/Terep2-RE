@@ -3,3 +3,4 @@ Address,Function name (i don’t really know),comment
 24C0,LoadFiles,Load files related to the track
 255C,LoadTextures,Load textures.pcx
 2454,LoadCarData,Load carX.dat
+2B8A,FreeDisplay,Frees the display segment and set video mode to 3
