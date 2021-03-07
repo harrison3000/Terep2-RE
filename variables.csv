@@ -1,3 +1,5 @@
 Address,sizeof,Variable name,Comment
 DB10,2,FramebufferSegment,Stores the segment of the framebuffer
 5B67,4,XMS buffer,Linear address of the buffer allocated using XMS
+E9E2,2,"Loaded from sim.cfg, offset 0",Seems to be related to car strength or resistance to deformation
+E9E4,2,"Loaded from sim.cfg, offset 2",Seems to be related to car strength or resistance to deformation

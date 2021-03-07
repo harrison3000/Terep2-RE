@@ -5,6 +5,8 @@ bits 16
 %include "macros.asm"
 
 patchPoint 0x1e
+	call progEnd
+	infiniteLoop
 	padFunc 0x46 - 0x1e
 
 patchPoint 0x46
@@ -63,10 +65,11 @@ setMemSize:
 	int 0x21
 	ret
 
-db "early end", 0
-earlyEnd:
+db "program end", 0
+progEnd:
 	incRange 0x1e, 0x46
 	infiniteLoop
+	ret
 
 db "File related things", 0
 ;I don't know what any of this does, but it calls a lot of dos interrupts
@@ -119,5 +122,8 @@ allocateMemory:
 		int 0x21
 		jc earlyEnd
 		mov [0x1a4b],ax
-	ret
+		ret
+	earlyEnd:
+		call progEnd
+		ret
 
