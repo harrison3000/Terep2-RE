@@ -25,6 +25,11 @@ patchPoint 0x252
 	nop
 	nop
 
+patchPoint 0x25d
+	;on main loop, it makes cpu usage a bit lower
+	;may also help analysing hot functions and such
+	hlt
+
 patchPoint 0x563
 	;break on esc
 	jnz afterRet
