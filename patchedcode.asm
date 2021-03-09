@@ -25,7 +25,7 @@ patchPoint 0x236
 	call 0x257 ;main loop
 	jmp 0x654 ;the only way to exit the loop is by pressing esc to break
 
-	padFunc 0x256 - 0x236
+	padFunc 0x257 - 0x236
 
 patchPoint 0x25d
 	;on main loop, it makes cpu usage a bit lower
