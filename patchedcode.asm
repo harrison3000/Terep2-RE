@@ -20,10 +20,12 @@ patchPoint 0x11b
 	padFunc 0x17e - 0x11b
 	end11b:
 
-patchPoint 0x252
-	jmp preLoop
-	nop
-	nop
+patchPoint 0x236
+	mov byte [0x6e],1 ; enable the timer interrupt (otherwise it will just skip processing)
+	call 0x257 ;main loop
+	jmp 0x654 ;the only way to exit the loop is by pressing esc to break
+
+	padFunc 0x256 - 0x236
 
 patchPoint 0x25d
 	;on main loop, it makes cpu usage a bit lower
@@ -36,6 +38,13 @@ patchPoint 0x563
 	ret
 	nop
 	afterRet:
+
+;these instructions were patched at runtime just before the main loop
+;ghidra didn't like it, so lets just write the correct value directly
+patchPoint 0x56ba
+	call 0x48d0
+patchPoint 0x56c8
+	call 0x500b
 
 ;reimplementation of the function at 0x58fc
 ;seems to be sound related, If you imediately return the game becomes muted
@@ -143,12 +152,3 @@ allocateMemory:
 	earlyEnd:
 		call progEnd
 		ret
-
-
-db "pre loop", 0
-preLoop:
-	mov byte [0x6e],1
-	call 0x257 ;main loop
-	jmp 0x654 ;the only way to exit the loop is by pressing esc to break
-
-
