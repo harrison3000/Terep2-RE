@@ -117,9 +117,7 @@ progEnd:
 allocateMemory:
 	;tries to open sim.cfg
 		mov dx,0x1a3d
-		mov al,0x0
-		mov ah,0x3d
-		int 0x21
+		call openFile
 		mov bx,ax
 		jc lab0142 ;sim.cfg not found
 
@@ -128,14 +126,11 @@ allocateMemory:
 		nop
 		mov dx,0xe9e2
 		mov cx,0x2
-		mov ah,0x3f
-		int 0x21
+		call readFile
 		mov dx,0xe9e4
 		mov cx,0x2
-		mov ah,0x3f
-		int 0x21
-		mov ah,0x3e
-		int 0x21
+		call readFile
+		call closeFile
 	lab0142:
 
 		;memory allocations
@@ -175,5 +170,10 @@ closeFile:
 
 allocMem:
 	mov ah, 0x48
+	int 0x21
+	ret
+
+readFile:
+	mov ah,0x3f
 	int 0x21
 	ret
