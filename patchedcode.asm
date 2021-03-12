@@ -100,20 +100,17 @@ writeRemaining
 
 ;================ORIGINAL END===============
 
-db "Sets memory size", 0
 setMemSize:
 	mov bx, 0x3000
 	mov ah, 0x4a
 	int 0x21
 	ret
 
-db "program end", 0
 progEnd:
 	incRange 0x1e, 0x46
 	infiniteLoop
 	ret
 
-db "File related things", 0
 ;I don't know what any of this does, but it calls a lot of dos interrupts
 ;it was disassembled using ndisasm
 ;seems to be related to segment allocations
@@ -166,19 +163,16 @@ allocateMemory:
 		ret
 
 
-db "Open File", 0
 openFile:
 	mov ax, 0x3d00
 	int 0x21
 	ret
 
-db "Close File", 0
 closeFile:
 	mov ah, 0x3e
 	int 0x21
 	ret
 
-db "Allocate memory", 0
 allocMem:
 	mov ah, 0x48
 	int 0x21
