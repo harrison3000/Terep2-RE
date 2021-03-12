@@ -72,6 +72,20 @@ patchPoint 0x252b
 	call openFile
 	padFunc 6
 
+patchPoint 0x2539
+	call readFile
+	call closeFile
+	padFunc 8
+
+patchPoint 0x2544
+	call openFile
+	padFunc 6
+
+patchPoint 0x2552
+	call readFile
+	call closeFile
+	padFunc 8
+
 ;these instructions were patched at runtime just before the main loop
 ;ghidra didn't like it, so lets just write the correct value directly
 patchPoint 0x56ba
