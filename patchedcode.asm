@@ -48,6 +48,18 @@ patchPoint 0x25d
 	nop
 	;hlt
 
+patchPoint 0x327
+	call 0x5831
+	nop
+
+patchPoint 0x3f3
+	call 0x5831
+	nop
+
+patchPoint 0x4b3
+	call 0x5831
+	nop
+
 patchPoint 0x563
 	;break on esc
 	jnz afterRet
