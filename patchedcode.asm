@@ -55,6 +55,23 @@ patchPoint 0x563
 	nop
 	afterRet:
 
+
+patchPoint 0x24e4
+	call openFile
+	padFunc 6
+
+patchPoint 0x2508
+	call readFile
+	padFunc 4
+
+patchPoint 0x2524
+	call closeFile
+	padFunc 4
+
+patchPoint 0x252b
+	call openFile
+	padFunc 6
+
 ;these instructions were patched at runtime just before the main loop
 ;ghidra didn't like it, so lets just write the correct value directly
 patchPoint 0x56ba
