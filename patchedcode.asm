@@ -60,6 +60,14 @@ patchPoint 0x2467
 	call openFile
 	padFunc 6
 
+patchPoint 0x2478
+	call readFile
+	padFunc 4
+
+patchPoint 0x247e
+	call closeFile
+	padFunc 4
+
 patchPoint 0x24e4
 	call openFile
 	padFunc 6
@@ -150,6 +158,13 @@ patchPoint 0x5a8b
 	call closeFile
 	padFunc 4
 
+patchPoint 0x5a9b
+	call readFile
+	padFunc 4
+
+patchPoint 0x5b38
+	call readFile
+	padFunc 4
 
 writeRemaining
 
