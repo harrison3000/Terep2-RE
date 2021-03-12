@@ -56,6 +56,10 @@ patchPoint 0x563
 	afterRet:
 
 
+patchPoint 0x2467
+	call openFile
+	padFunc 6
+
 patchPoint 0x24e4
 	call openFile
 	padFunc 6
@@ -133,6 +137,10 @@ patchPoint 0x58fc
 	ret
 
 	padFunc 0x30
+
+patchPoint 0x5a62
+	call openFile
+	padFunc 6
 
 
 writeRemaining
