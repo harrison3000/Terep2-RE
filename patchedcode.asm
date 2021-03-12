@@ -142,6 +142,14 @@ patchPoint 0x5a62
 	call openFile
 	padFunc 6
 
+patchPoint 0x5a7b
+	call lseekBeg
+	padFunc 5
+
+patchPoint 0x5a8b
+	call closeFile
+	padFunc 4
+
 
 writeRemaining
 
