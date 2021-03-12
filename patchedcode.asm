@@ -20,6 +20,18 @@ patchPoint 0x11b
 	padFunc 0x17e - 0x11b
 	end11b:
 
+patchPoint 0x1c7
+	call openFile
+	padFunc 6
+
+patchPoint 0x1e9
+	call allocMem
+	padFunc 4
+
+patchPoint 0x202
+	call closeFile
+	padFunc 4
+
 patchPoint 0x236
 	mov byte [0x6e],1 ; enable the timer interrupt (otherwise it will just skip processing)
 	call 0x257 ;main loop
@@ -28,9 +40,13 @@ patchPoint 0x236
 	padFunc 0x257 - 0x236
 
 patchPoint 0x25d
-	;on main loop, it makes cpu usage a bit lower
+	;on main loop, originally a nop
+	;a htl here it makes cpu usage a bit lower
 	;may also help analysing hot functions and such
-	hlt
+	;but ghidra doesn't like it
+
+	nop
+	;hlt
 
 patchPoint 0x563
 	;break on esc
@@ -126,29 +142,44 @@ allocateMemory:
 	lab0142:
 
 		;memory allocations
-		mov ah,0x48
 		mov bx,0x1000
-		int 0x21
+		call allocMem
 		jc earlyEnd
 		mov [0x1a45],ax
 		mov gs,ax
-		mov ah,0x48
 		mov bx,0x1000
-		int 0x21
+		call allocMem
 		jc earlyEnd
 		mov [0x1a47],ax
 		mov fs,ax
-		mov ah,0x48
 		mov bx,0x1000
-		int 0x21
+		call allocMem
 		jc earlyEnd
 		mov [0x1a49],ax
-		mov ah,0x48
 		mov bx,0x1000
-		int 0x21
+		call allocMem
 		jc earlyEnd
 		mov [0x1a4b],ax
 		ret
 	earlyEnd:
 		call progEnd
 		ret
+
+
+db "Open File", 0
+openFile:
+	mov ax, 0x3d00
+	int 0x21
+	ret
+
+db "Close File", 0
+closeFile:
+	mov ah, 0x3e
+	int 0x21
+	ret
+
+db "Allocate memory", 0
+allocMem:
+	mov ah, 0x48
+	int 0x21
+	ret
