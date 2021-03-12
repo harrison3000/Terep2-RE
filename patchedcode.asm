@@ -60,9 +60,17 @@ patchPoint 0x24e4
 	call openFile
 	padFunc 6
 
+patchPoint 0x24f9
+	call lseekEnd
+	padFunc 5
+
 patchPoint 0x2508
 	call readFile
 	padFunc 4
+
+patchPoint 0x2512
+	call lseekBeg
+	padFunc 5
 
 patchPoint 0x2524
 	call closeFile
@@ -206,5 +214,15 @@ allocMem:
 
 readFile:
 	mov ah,0x3f
+	int 0x21
+	ret
+
+lseekEnd:
+	mov ax,0x4202
+	int 0x21
+	ret
+
+lseekBeg:
+	mov ax,0x4200
 	int 0x21
 	ret
