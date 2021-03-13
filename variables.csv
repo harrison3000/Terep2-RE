@@ -9,3 +9,4 @@ CS:571E,1,LastKey,"Scan code of the last key pressed, set by the keyboard interr
 011E,2,CameraDistance,"Can be changed in-game with the camera control keys (/,*,-,+)"
 007D,1,SplitScreen,"1 if split-screen, 0 if not"
 006E,1,EnableTimer,"The timer interrupt tests this variable, if it’s zero it does nothing"
+5BBA,2,NumCars,The number of cars loaded
