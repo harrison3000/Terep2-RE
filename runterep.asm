@@ -11,6 +11,7 @@ bits 16
 
 segment code align=16
 	extern copyFramebuffer_
+	extern fun_3f98_
 
 	..start:
 
@@ -18,6 +19,8 @@ segment code align=16
 	mov ax, originalData
 
 	cFunc 0x2baa, copyFramebuffer_
+
+	cFunc 0x3f98, fun_3f98_
 
 	patchPoint 0x5689
 	mov ax, originalData
