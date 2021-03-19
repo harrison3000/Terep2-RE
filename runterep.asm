@@ -7,15 +7,15 @@ segment code align=16
 	..start:
 
 	patchPoint 0x52
-	mov ax, data
+	mov ax, originalData
 
 	patchPoint 0x5689
-	mov ax, data
+	mov ax, originalData
 
 	writeRemaining
 
 
-segment data align=16
+segment originalData align=16
 	;I tried 62224 (0xF310) bytes and it worked
 	incbin "data.bin"
 
