@@ -3,11 +3,21 @@ bits 16
 %define codeBinName "codep.bin"
 %include "macros.asm"
 
+%macro cFunc 2
+	patchPoint %1
+	call far %2
+	ret
+%endmacro
+
 segment code align=16
+	extern copyFramebuffer_
+
 	..start:
 
 	patchPoint 0x52
 	mov ax, originalData
+
+	cFunc 0x2baa, copyFramebuffer_
 
 	patchPoint 0x5689
 	mov ax, originalData

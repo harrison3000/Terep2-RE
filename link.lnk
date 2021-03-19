@@ -1,3 +1,4 @@
 name ter.exe
 format dos
 file ter.obj
+file ccode.obj
