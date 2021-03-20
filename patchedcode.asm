@@ -56,9 +56,12 @@ patchPoint 0x202
 patchPoint 0x236
 	mov byte [0x6e],1 ; enable the timer interrupt (otherwise it will just skip processing)
 	call 0x257 ;main loop
-	jmp 0x654 ;the only way to exit the loop is by pressing esc to break
 
-	padFunc 0x257 - 0x236
+	;the only way to exit the loop is by pressing esc to break,
+	;0x1e is not a clean exit, but this is dosbox, who cares?
+	jmp 0x1e
+
+
 
 patchPoint 0x25d
 	;on main loop, originally a nop
@@ -210,7 +213,8 @@ setMemSize:
 	ret
 
 progEnd:
-	incRange 0x1e, 0x46
+	mov ax, 0x4c00
+	int 0x21
 	infiniteLoop
 	ret
 
