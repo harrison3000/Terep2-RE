@@ -14,6 +14,13 @@ patchPoint 0x46
 	call setMemSize
 	padFunc 0x52 - 0x46
 
+patchPoint 0x57
+	;skip the XMS things
+	;it seems the game doesn't use it, it just alocates, tests and dealocates 🤷
+	;putting the CPU in unreal mode had the side effect of making dosbox enter dynamic 100% mode
+	;with this skip it has to be set manually... however it's worth it from a reverse engineering point of view
+	jmp 0xdc
+
 patchPoint 0x11b
 	call allocateMemory
 	jmp end11b
