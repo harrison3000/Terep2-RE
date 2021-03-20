@@ -4,3 +4,4 @@ Address,Function name (i don’t really know),comment
 255C,LoadTextures,Load textures.pcx
 2454,LoadCarData,Load carX.dat
 2B8A,FreeDisplay,Frees the display segment and set video mode to 3
+3827,RenderTexTris,"Renders textured triangles, disabling this function makes only the solid color ones visible"
