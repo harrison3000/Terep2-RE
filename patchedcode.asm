@@ -27,7 +27,19 @@ patchPoint 0x11b
 
 patchPoint 0x120
 	call allocateMemory
-	jmp 0x17e
+	jmp 0x160
+
+patchPoint 0x160
+	call 0x24c0
+	call 0x255c
+	call 0x184 ;"new" func
+	jmp 0x21c
+
+patchPoint 0x170
+	ret
+
+patchPoint 0x1ad
+	jc 0x170
 
 patchPoint 0x1c7
 	call openFile
