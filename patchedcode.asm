@@ -32,7 +32,7 @@ patchPoint 0x120
 patchPoint 0x160
 	call 0x24c0
 	call 0x255c
-	call 0x184 ;"new" func
+	call 0x184 ;"new" func, car loading loop
 	jmp 0x21c
 
 patchPoint 0x170
