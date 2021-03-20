@@ -19,13 +19,15 @@ patchPoint 0x57
 	;it seems the game doesn't use it, it just alocates, tests and dealocates 🤷
 	;putting the CPU in unreal mode had the side effect of making dosbox enter dynamic 100% mode
 	;with this skip it has to be set manually... however it's worth it from a reverse engineering point of view
-	jmp 0xdc
+	call 0xdc
+	jmp 0x120
 
 patchPoint 0x11b
+	ret
+
+patchPoint 0x120
 	call allocateMemory
-	jmp end11b
-	padFunc 0x17e - 0x11b
-	end11b:
+	jmp 0x17e
 
 patchPoint 0x1c7
 	call openFile
