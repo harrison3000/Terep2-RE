@@ -10,11 +10,12 @@
 	mov ax,[0xdb10]
 	mov es,ax
 	mov si,bx
-	cmp word [0xdb12],0xf0f0
-	jnc lPart2
+
 	nop
 	nop
-loop1:
+
+
+fLoop:
 	mov di,si
 	shl di,byte 0x2
 	add di,si
@@ -22,15 +23,24 @@ loop1:
 	mov ax,[si-0x2438]
 	mov cx,[si-0x2436]
 	sub cx,ax
-	jns l2da1
+	jns nltz
 	nop
 	nop
 	add ax,cx
 	neg cx
-l2da1:
+nltz:
 	inc cx
 	add di,ax
 	cld
+
+	nop
+	cmp word [0xdb12],0xf0f0
+	jnc lPath2
+	nop
+	mop
+
+	;Path1
+
 	mov ax,[0xdb12]
 	shr cx,1
 	rep stosw
@@ -38,40 +48,31 @@ l2da1:
 	nop
 	nop
 	stosb
-l2db1:
-	add si,byte +0x4
-	dec dx
-	jnz loop1
-	pop es
-lRet:
-	ret
-lPart2:
+
+	jmp endif
+
+	;Path2
+lPath2:
+	;these 2 insts were executed outside the loop before, but it doesn't matter here
+	;I want easier understanding, not speed, it will be fast anyway
 	mov bx,[0xdb12]
 	sub bh,0xf0
-l2dc0:
-	mov di,si
-	shl di,byte 0x2
-	add di,si
-	shl di,byte 0x4
-	mov ax,[si-0x2438]
-	mov cx,[si-0x2436]
-	sub cx,ax
-	jns l2ddc
-	nop
-	nop
-	add ax,cx
-	neg cx
-l2ddc:
-	inc cx
-	add di,ax
-	cld
+
 loopsto:
 	mov bl,[es:di]
 	mov al,[bx+0x2e51]
 	stosb
 	loop loopsto
+
+	jmp endif
+	nop
+
+endif:
+
+l2db1:
 	add si,byte +0x4
 	dec dx
-	jnz l2dc0
+	jnz fLoop
 	pop es
+lRet:
 	ret
