@@ -14,7 +14,7 @@ cmp word [0xdb12],0xf0f0
 jnc lPart2
 nop
 nop
- loop1:
+	loop1:
 mov di,si
 shl di,byte 0x2
 add di,si
@@ -27,7 +27,7 @@ nop
 nop
 add ax,cx
 neg cx
- l2da1:
+	l2da1:
 inc cx
 add di,ax
 cld
@@ -38,17 +38,17 @@ jnc l2db1
 nop
 nop
 stosb
- l2db1:
+	l2db1:
 add si,byte +0x4
 dec dx
 jnz loop1
 pop es
- lRet:
+	lRet:
 ret
- lPart2:
+	lPart2:
 mov bx,[0xdb12]
 sub bh,0xf0
- l2dc0:
+	l2dc0:
 mov di,si
 shl di,byte 0x2
 add di,si
@@ -61,11 +61,11 @@ nop
 nop
 add ax,cx
 neg cx
- l2ddc:
+	l2ddc:
 inc cx
 add di,ax
 cld
- loopsto:
+	loopsto:
 mov bl,[es:di]
 mov al,[bx+0x2e51]
 stosb
