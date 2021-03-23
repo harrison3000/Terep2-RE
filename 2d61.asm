@@ -41,13 +41,10 @@ nltz:
 
 	;Path1
 
+	;aparently on this path AL is always equal to AH
 	mov ax,[0xdb12]
-	shr cx,1
-	rep stosw
-	jnc l2db1
-	nop
-	nop
-	stosb
+	rep stosb
+
 
 	jmp endif
 
