@@ -142,10 +142,6 @@ patchPoint 0x2552
 	call closeFile
 	padFunc 8
 
-patchPoint 0x2d61
-	call moved2d61
-	ret
-
 ;these instructions were patched at runtime just before the main loop
 ;ghidra didn't like it, so lets just write the correct value directly
 patchPoint 0x56ba
@@ -298,6 +294,3 @@ lseekBeg:
 	mov ax,0x4200
 	int 0x21
 	ret
-
-moved2d61:
-	%include "2d61.asm"

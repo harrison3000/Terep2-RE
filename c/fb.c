@@ -42,3 +42,59 @@ void fun_3f98(uint16_t a, uint16_t b, char c){
 		gameFb[i] = c;
 	}
 }
+
+
+//this function renders untextured triangles
+void fun_2d61(){
+	uint16_t *a = (uint16_t *)0xdbc4;
+
+	if (a[0] == a[1]){
+		return;
+	}
+
+	unsigned short s  = *(unsigned short *)0xdb10;
+	char far *gameFb = MK_FP(s,0);
+
+	//this name came from ghidra
+	uint16_t iVar7 = a[0] << 2;
+
+	int qtd = a[1] - a[0];
+	int i;
+	for(i = 0; i <= qtd; i++){
+		int *tmp = (int *)(iVar7 + 0xdbc8);
+		int16_t iVar4 = tmp[0];
+		int16_t iVar5 = tmp[1] - iVar4;
+
+		if (iVar5 < 0) {
+        iVar4 = iVar4 + iVar5;
+        iVar5 = -iVar5;
+      }
+
+      iVar5++;
+
+      uint16_t pbVar9 = iVar7 * 0x50 + iVar4;
+
+		void *something = (void *)0xdb12;//pixel? IDK
+		char *p = something;
+      if (*(uint *)something < 0xf0f0) {
+			char pc = p[0];
+			int j;
+			for(j = 0; j< iVar5; j++){
+				gameFb[j + pbVar9] = pc;
+			}
+		}else{
+			char ph = p[1]
+			ph -= 0xf0;
+
+			for(j = 0; j< iVar5; j++){
+				pl = gameFb[pbVar9 + j];
+				uint16_t px = pl + (ph << 8);
+				char pc = *(char *)(px + 0x2e51);//some kind of pallete?
+				gameFb[pbVar9 + j] = pc;
+			}
+		}
+
+		iVar7 += 4;
+	}
+}
+
