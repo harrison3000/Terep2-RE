@@ -9,7 +9,7 @@ void copyFramebuffer(){
 	char far *gameFb = MK_FP(s,0);
 	char far *vgaFb  = MK_FP(sv,0);
 
-	int32_t i;
+	uint16_t i;
 	for (i = 0; i < 64000; i++){
 		vgaFb[i] = gameFb[i];
 	}
