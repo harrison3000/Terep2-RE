@@ -4,7 +4,7 @@ default:
 	nasm patchedcode.asm -f bin -o codep.bin
 	nasm runterep.asm -f obj -o ter.obj
 
-	wcc -5 -mm -wx -s -zls -fo=ccode.obj c/fb.c
+	owcc -std=c99 -c -march=i286 -mcmodel=m -Wall -b=dos -fno-stack-check -fnostdlib -fo=ccode.obj c/fb.c
 
 	wlink @link.lnk
 

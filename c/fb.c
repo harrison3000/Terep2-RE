@@ -76,18 +76,19 @@ void fun_2d61(){
 
 		void *something = (void *)0xdb12;//pixel? IDK
 		char *p = something;
-      if (*(uint *)something < 0xf0f0) {
+		if (*(uint16_t *)something < 0xf0f0) {
 			char pc = p[0];
 			int j;
 			for(j = 0; j< iVar5; j++){
 				gameFb[j + pbVar9] = pc;
 			}
 		}else{
-			char ph = p[1]
+			char ph = p[1];
 			ph -= 0xf0;
 
+			int j;
 			for(j = 0; j< iVar5; j++){
-				pl = gameFb[pbVar9 + j];
+				char pl = gameFb[pbVar9 + j];
 				uint16_t px = pl + (ph << 8);
 				char pc = *(char *)(px + 0x2e51);//some kind of pallete?
 				gameFb[pbVar9 + j] = pc;
