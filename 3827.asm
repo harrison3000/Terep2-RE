@@ -1,7 +1,7 @@
 00003827  8B36C4DB          mov si,[0xdbc4]
 0000382B  8B3EC6DB          mov di,[0xdbc6]
 0000382F  2BFE              sub di,si
-00003831  0F84C200          jz near 0x38f7
+00003831  0F84C200          jz l38f7
 00003835  47                inc di
 00003836  C1E602            shl si,byte 0x2
 00003839  06                push es
@@ -23,7 +23,7 @@
 00003863  2BF5              sub si,bp
 00003865  2BD3              sub dx,bx
 00003867  2BC8              sub cx,ax
-00003869  790E              jns 0x3879
+00003869  790E              jns l3879
 0000386B  90                nop
 0000386C  90                nop
 0000386D  03C1              add ax,cx
@@ -32,6 +32,7 @@
 00003873  F7DA              neg dx
 00003875  03EE              add bp,si
 00003877  F7DE              neg si
+                             l3879:
 00003879  03F8              add di,ax
 0000387B  41                inc cx
 0000387C  660FB7C9          movzx ecx,cx
@@ -63,7 +64,7 @@
 000038CB  90                nop
 000038CC  90                nop
 000038CD  3CF0              cmp al,0xf0
-000038CF  7327              jnc 0x38f8
+000038CF  7327              jnc l38f8
 000038D1  90                nop
 000038D2  90                nop
 000038D3  268805            mov [es:di],al
@@ -82,7 +83,9 @@
 000038F1  4F                dec di
 000038F2  0F8549FF          jnz l383f
 000038F6  07                pop es
+                             l38f7:
 000038F7  C3                ret
+                             l38f8:
 000038F8  2CF0              sub al,0xf0
 000038FA  8AE0              mov ah,al
 000038FC  268A05            mov al,[es:di]
