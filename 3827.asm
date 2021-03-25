@@ -7,6 +7,7 @@
 00003839  06                push es
 0000383A  A110DB            mov ax,[0xdb10]
 0000383D  8EC0              mov es,ax
+                             l383f:
 0000383F  57                push di
 00003840  8BFE              mov di,si
 00003842  C1E702            shl di,byte 0x2
@@ -50,6 +51,7 @@
 000038AA  66C1E308          shl ebx,byte 0x8
 000038AE  66C1E508          shl ebp,byte 0x8
 000038B2  FC                cld
+                             l38b3:
 000038B3  66C1CB10          ror ebx,byte 0x10
 000038B7  66C1CD10          ror ebp,byte 0x10
 000038BB  66C1CE10          ror esi,byte 0x10
@@ -57,7 +59,7 @@
 000038C1  C1E608            shl si,byte 0x8
 000038C4  648A00            mov al,[fs:bx+si]
 000038C7  3CFF              cmp al,0xff
-000038C9  740B              jz 0x38d6
+000038C9  740B              jz l38d6
 000038CB  90                nop
 000038CC  90                nop
 000038CD  3CF0              cmp al,0xf0
@@ -65,6 +67,7 @@
 000038D1  90                nop
 000038D2  90                nop
 000038D3  268805            mov [es:di],al
+                             l38d6:
 000038D6  47                inc di
 000038D7  66C1C610          rol esi,byte 0x10
 000038DB  66C1C310          rol ebx,byte 0x10
@@ -72,12 +75,12 @@
 000038E3  6603D9            add ebx,ecx
 000038E6  6603EA            add ebp,edx
 000038E9  4E                dec si
-000038EA  75C7              jnz 0x38b3
+000038EA  75C7              jnz l38b3
 000038EC  5E                pop si
 000038ED  5F                pop di
 000038EE  83C604            add si,byte +0x4
 000038F1  4F                dec di
-000038F2  0F8549FF          jnz near 0x383f
+000038F2  0F8549FF          jnz l383f
 000038F6  07                pop es
 000038F7  C3                ret
 000038F8  2CF0              sub al,0xf0
@@ -87,4 +90,4 @@
 00003900  8A9F512E          mov bl,[bx+0x2e51]
 00003904  93                xchg ax,bx
 00003905  268805            mov [es:di],al
-00003908  EBCC              jmp short 0x38d6
+00003908  EBCC              jmp l38d6
