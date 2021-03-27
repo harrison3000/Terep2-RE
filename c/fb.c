@@ -55,13 +55,12 @@ void fun_2d61(){
 	unsigned short s  = *(unsigned short *)0xdb10;
 	char far *gameFb = MK_FP(s,0);
 
-	//this name came from ghidra
-	uint16_t iVar7 = a[0] << 2;
+	uint16_t offset = a[0] << 2;
 
 	int qtd = a[1] - a[0];
 	int i;
 	for(i = 0; i <= qtd; i++){
-		int *tmp = (int *)(iVar7 + 0xdbc8);
+		int *tmp = (int *)(offset + 0xdbc8);
 		int16_t iVar4 = tmp[0];
 		int16_t iVar5 = tmp[1] - iVar4;
 
@@ -72,7 +71,7 @@ void fun_2d61(){
 
       iVar5++;
 
-      uint16_t pbVar9 = iVar7 * 0x50 + iVar4;
+      uint16_t pbVar9 = offset * 0x50 + iVar4;
 
 		void *something = (void *)0xdb12;//pixel? IDK
 		char *p = something;
@@ -95,7 +94,7 @@ void fun_2d61(){
 			}
 		}
 
-		iVar7 += 4;
+		offset += 4;
 	}
 }
 
