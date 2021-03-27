@@ -68,6 +68,18 @@ jnc l38f8
 nop
 nop
 mov [es:di],al
+jmp l38d6
+
+ l38f8:
+sub al,0xf0
+mov ah,al
+mov al,[es:di]
+xchg ax,bx
+mov bl,[bx+0x2e51]
+xchg ax,bx
+mov [es:di],al
+jmp l38d6
+
  l38d6:
 inc di
 rol esi,byte 0x10
@@ -85,12 +97,4 @@ jnz l383f
 pop es
  l38f7:
 ret
- l38f8:
-sub al,0xf0
-mov ah,al
-mov al,[es:di]
-xchg ax,bx
-mov bl,[bx+0x2e51]
-xchg ax,bx
-mov [es:di],al
-jmp l38d6
+
