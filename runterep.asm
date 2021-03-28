@@ -5,7 +5,15 @@ bits 16
 
 %macro cFunc 2
 	patchPoint %1
+
+	;i286 doesn't have fs and gs, and openwatcom only makes 16bit code for i286
+	;therefore, we will pass those on the stack for the functions that needs them
+	push gs
+	push fs
 	call far %2
+	pop fs
+	pop gs
+
 	ret
 %endmacro
 

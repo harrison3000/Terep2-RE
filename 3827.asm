@@ -52,6 +52,20 @@ movzx ebp,bp
 shl ebx,byte 0x8
 shl ebp,byte 0x8
 cld
+
+call innerLoop
+
+pop si
+pop di
+add si,byte +0x4
+dec di
+jnz l383f
+pop es
+ l38f7:
+ret
+
+
+innerLoop:
  l38b3:
 ror ebx,byte 0x10
 ror ebp,byte 0x10
@@ -89,12 +103,4 @@ add ebx,ecx
 add ebp,edx
 dec si
 jnz l38b3
-pop si
-pop di
-add si,byte +0x4
-dec di
-jnz l383f
-pop es
- l38f7:
 ret
-
